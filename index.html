@@ -1,295 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aiyda Syed | My Digital Universe</title>
 <meta name="description" content="Aiyda Syed — Data Science Portfolio">
-<title>Aiyda Syed | Data Science Portfolio</title>
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#000; --pink:#ff2e9a; --panel:#ffb3de; --panel-ink:#a3105f;
+  --mint:#3dff8f; --blue:#6b6bff; --sun:#ffe45e; --lav:#d79bff;
+  --px:'Press Start 2P','Courier New',monospace; --vt:'VT323','Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#05020c;color:#fff;font-family:var(--vt);font-size:22px;line-height:1.15;
+  background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px);
+  background-size:46px 46px,29px 29px;background-position:0 0,13px 21px;
+  overflow-x:hidden;image-rendering:pixelated;
+}
+a{color:inherit}
+:focus-visible{outline:3px dashed var(--sun);outline-offset:3px}
+svg.sp{display:block;shape-rendering:crispEdges}
+
+/* HUD */
+.hud{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;font:10px var(--px);color:var(--pink)}
+.hud .hp{display:flex;align-items:center;gap:8px}
+.bar{width:90px;height:8px;background:#fff;position:relative}
+.bar i{position:absolute;inset:0 22% 0 0;background:var(--mint)}
+
+/* ticker */
+.ticker{background:var(--blue);overflow:hidden;white-space:nowrap;border-top:4px solid #a9a9ff;font:16px var(--px);color:#fff;padding:14px 0}
+.ticker div{display:inline-block;animation:slide 28s linear infinite}
+.ticker span{margin:0 26px}
+.ticker b{color:var(--sun)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ground */
+.ground{height:26px;background:
+  linear-gradient(var(--mint) 0 8px,#1ea860 8px 12px,transparent 12px),
+  repeating-linear-gradient(90deg,#4b4bd8 0 22px,#6b6bff 22px 24px);
+}
+
+/* hero */
+.hero{position:relative;padding:20px 20px 0;max-width:1100px;margin:0 auto}
+.frame{border:3px solid var(--mint);border-radius:28px;background:#000;text-align:center;padding:70px 16px 60px;min-height:340px}
+.frame h1{font:clamp(24px,6.6vw,66px) var(--px);color:var(--pink);text-shadow:5px 5px 0 var(--mint);line-height:1.25}
+.frame h2{font:clamp(14px,3.3vw,32px) var(--px);color:var(--mint);text-shadow:3px 3px 0 #0b5a2c;margin:26px 0 20px;line-height:1.5}
+.frame .tl{font:clamp(20px,3.2vw,32px) var(--vt);line-height:1.2;margin-bottom:30px}
+.frame .tl span{display:block}
+.frame .tl .a{color:var(--sun)}
+.frame .tl .b{color:var(--lav)}
+.btn{display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;background:#22d46e;border:3px solid var(--mint);border-radius:8px;padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48}
+.btn.pink{background:var(--pink);border-color:#ff7cc3;box-shadow:0 5px 0 #a3105f;text-shadow:2px 2px 0 #a3105f}
+.btn.pink:hover{box-shadow:0 2px 0 #a3105f}
+.hero .player{position:absolute;left:3%;bottom:-2px}
+.hero .cat{position:absolute;right:20%;bottom:-2px}
+.hero .cloud{position:absolute;top:-6px}
+.walk{animation:bob 1s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+
+/* sections */
+section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
+.lvl{font:clamp(24px,5vw,44px) var(--px);color:var(--pink);line-height:1.25;text-shadow:3px 3px 0 #5a0a38}
+.sub{font:12px var(--px);color:var(--lav);margin:12px 0 18px;line-height:1.7}
+.name{font:clamp(22px,4.4vw,38px) var(--px);color:var(--mint);line-height:1.2;text-shadow:3px 3px 0 #0b5a2c}
+
+/* windows */
+.win{background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38}
+.win::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:var(--pink);
+  background-image:linear-gradient(90deg,transparent 0 6px,#ffb3de 6px 14px,transparent 14px),linear-gradient(90deg,transparent calc(100% - 52px),#ffb3de calc(100% - 52px) calc(100% - 44px),transparent calc(100% - 44px) calc(100% - 30px),#ffb3de calc(100% - 30px) calc(100% - 22px),transparent calc(100% - 22px));
+  background-size:100% 8px,100% 8px;background-repeat:no-repeat;background-position:0 7px,0 7px}
+.tag{display:inline-block;line-height:1.6;font:11px var(--px);background:#ffe9f6;color:var(--blue);border:2px solid #ff8cc8;padding:6px 10px;margin-bottom:12px}
+.win p,.win li{font-size:22px;margin-bottom:8px}
+.win li{list-style:none;margin:0 0 3px}
+.win li::before{content:"• "}
+.win strong{color:var(--blue)}
+.kv b{color:var(--blue);font-weight:400}
+
+/* level 1 layout */
+.l1{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:34px 26px;align-items:start;margin-top:10px}
+.l1 .title{grid-column:1}
+.consolewrap{display:flex;justify-content:center;grid-column:2;grid-row:1}
+.hello{grid-column:3;grid-row:1}
+.console{width:100%;max-width:360px;background:#ff1493;border:4px solid #b30d6c;border-radius:20px 20px 12px 12px;padding:12px;box-shadow:inset -6px -6px 0 #c70f78,6px 6px 0 #5a0a38}
+.screen{background:#3b3b46;border-radius:10px 10px 4px 4px;padding:16px;display:flex;justify-content:center}
+.screen div{background:#2e7d4a;border:3px solid #222;padding:10px 20px 0;position:relative}
+.pad{margin-top:12px;height:100px;background:#ff8cc8;border:4px solid #b30d6c;border-radius:6px;background-image:linear-gradient(#ff5fb0 2px,transparent 2px),linear-gradient(90deg,#ff5fb0 2px,transparent 2px);background-size:25% 33.3%}
+.btns{display:flex;justify-content:space-between;padding:10px 6px 0}
+.btns i{width:16px;height:16px;border-radius:50%;background:#ffd0ea;border:2px solid #b30d6c}
+.weap{grid-column:1}.log{grid-column:2}.skills{grid-column:3}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tiles span{background:#1a0a22;color:var(--mint);font:11px var(--px);text-align:center;padding:14px 4px;border-radius:8px;border:2px solid var(--pink);line-height:1.5}
+
+/* missions */
+.quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px 26px;margin-top:26px}
+.quest .n{position:absolute;right:10px;top:-2px;font:11px var(--px);color:#fff;z-index:1;line-height:22px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px}
+.mini{font:11px var(--px);text-decoration:none;color:#fff;background:var(--blue);padding:10px 12px;border:2px solid #a9a9ff;box-shadow:0 3px 0 #3a3ab0;display:inline-block}
+.quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00}
+
+/* misc */
+.power{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.power span{font:12px var(--px);background:#000;border:3px solid var(--mint);color:var(--mint);padding:12px 14px;border-radius:10px;box-shadow:3px 3px 0 #0b5a2c}
+.goal{margin-top:34px;border:3px dashed var(--sun);padding:22px;font:13px var(--px);line-height:1.9;color:var(--sun)}
+.contact{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px}
+.door{width:64px;height:90px;background:#9b5b2a;border:6px solid #8d8d9a;border-bottom:0;border-radius:32px 32px 0 0;position:relative;margin-left:auto}
+.door::after{content:"";position:absolute;right:10px;top:48px;width:8px;height:8px;background:var(--sun)}
+.cta-row{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.coins{display:flex;gap:26px;padding:20px;justify-content:center;flex-wrap:wrap}
+.coins i{width:20px;height:20px;border-radius:50%;background:#ffb020;border:3px solid #ff8a00;animation:bob 1.2s steps(2) infinite}
+.coins i:nth-child(2n){animation-delay:.4s}
+footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 40px;line-height:1.8}
+
+@media(max-width:860px){
+  body{font-size:20px}
+  .l1{grid-template-columns:1fr}
+  .l1>*{grid-column:1!important;grid-row:auto!important}
+  .consolewrap{order:2}.hello{order:3}.weap{order:4}.log{order:5}.skills{order:6}
+  .hero .player{left:6px}.hero .cat{right:10px}
+  .frame{padding:56px 12px 70px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
 
-<header class="navbar">
-  <a href="#home" class="logo">AIYDA<span>.</span></a>
-  <nav>
-    <a href="#profile">Profile</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <a href="#projects" class="nav-btn">View Work</a>
+<div class="hud" aria-hidden="true">
+  <span>XP: DATA SCIENCE LEVEL 03</span>
+  <span class="hp"><svg class="sp" data-s="heart" data-px="3"></svg><span class="bar"><i></i></span>PLAYER 01</span>
+</div>
+
+<header class="hero" id="home">
+  <span class="cloud" style="left:30%"><svg class="sp" data-s="cloud" data-px="5"></svg></span>
+  <span class="cloud" style="right:6%;top:30px"><svg class="sp" data-s="cloud" data-px="4"></svg></span>
+  <div class="frame">
+    <h1>MY DIGITAL UNIVERSE</h1>
+    <h2>Data Science Student</h2>
+    <p class="tl"><span class="a">Turning data into insights,</span><span class="b">ideas into projects.</span></p>
+    <a class="btn" href="#profile">START</a>
+  </div>
+  <span class="player walk"><svg class="sp" data-s="girl" data-px="9" role="img" aria-label="Pixel avatar"></svg></span>
+  <span class="cat"><svg class="sp" data-s="cat" data-px="7" role="img" aria-label="Pixel cat"></svg></span>
 </header>
+<div class="ground"></div>
+<div class="ticker" aria-hidden="true"><div data-t="About Me"></div></div>
 
-<main>
+<section id="profile">
+  <div class="l1">
+    <div class="title">
+      <h2 class="lvl">Level<br>01</h2>
+      <p class="sub">Meet the<br>player</p>
+      <h3 class="name">Aiyda<br>Syed</h3>
+    </div>
 
-<section id="home" class="hero">
-  <div class="hero-content">
-    <p class="eyebrow">DATA SCIENCE STUDENT • DATA ANALYTICS • MACHINE LEARNING</p>
-    <h1>AIYDA<br><span>SYED</span></h1>
-    <p class="hero-intro">
-      Building practical, data-driven projects that turn raw data into meaningful insights,
-      predictions, and useful AI applications.
-    </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn primary">Explore Projects ↗</a>
-      <a href="#contact" class="btn secondary">Let's Connect</a>
+    <div class="consolewrap">
+      <div class="console">
+        <div class="screen"><div><svg class="sp" data-s="girl" data-px="9" role="img" aria-label="Pixel avatar"></svg></div></div>
+        <div class="btns"><i></i><i></i><i></i></div>
+        <div class="pad"></div>
+      </div>
     </div>
-    <div class="contact-strip">
-      <span>GitHub: <b>aida214</b></span>
-      <span>Gmail: <b>aiydasyed@gmail.com</b></span>
-    </div>
-  </div>
 
-  <div class="hero-visual">
-    <div class="blob blob-a"></div>
-    <div class="blob blob-b"></div>
-    <div class="data-window">
-      <div class="window-top"><i></i><i></i><i></i><span>data_analysis.py</span></div>
-      <div class="code-line"><small>01</small><span>data</span> = dataset.<b>clean</b>()</div>
-      <div class="code-line"><small>02</small>profile = data.<b>analyze</b>()</div>
-      <div class="code-line"><small>03</small>model = ML.<b>fit</b>(data)</div>
-      <div class="code-line"><small>04</small>insights = model.<b>predict</b>()</div>
-      <div class="success">✓ useful insights generated</div>
-    </div>
-    <div class="floating-card">📊 Data → Insights</div>
-    <div class="floating-pill">AI + ML</div>
-  </div>
-</section>
+    <article class="win hello kv">
+      <span class="tag">Hello !!</span>
+      <p><b>Player:</b> Aiyda Syed</p>
+      <p><b>Role:</b> Data Science student</p>
+      <p><b>Mission:</b> Turn raw data into useful insights, predictions and practical AI apps.</p>
+      <p><b>Status:</b> Ready to explore, build and win.</p>
+      <p>Let's start the game!</p>
+    </article>
 
-<section id="profile" class="section">
-  <div class="section-label">01 / PROFILE</div>
-  <div class="two-column">
-    <div>
-      <h2>Curious about<br><span>what data can do.</span></h2>
-    </div>
-    <div class="content-text">
-      <p>
-        I am a BS Data Science student at the Institute of Management Sciences (IMSciences),
-        Peshawar, with a strong interest in data analytics, machine learning, and practical AI solutions.
-      </p>
-      <p>
-        I enjoy transforming raw data into meaningful insights through data analysis,
-        visualization, forecasting, and predictive modeling. I am passionate about building
-        practical, data-driven projects that solve real-world problems and continuously expanding
-        my skills in the field of data science.
-      </p>
-    </div>
-  </div>
+    <article class="win weap">
+      <span class="tag">Weapons Mastery</span>
+      <div class="tiles"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span>Scikit-learn</span><span>Plotly</span><span>Jupyter</span><span>Git</span><span>Streamlit</span></div>
+    </article>
 
-  <div class="info-grid">
-    <div class="info-card">
-      <span class="label">EDUCATION</span>
-      <h3>BS Data Science</h3>
+    <article class="win log kv">
+      <span class="tag">Training Log</span>
+      <p><b>BS Data Science</b></p>
       <p>Institute of Management Sciences (IMSciences), Peshawar</p>
-      <small>Currently pursuing • 3rd year</small>
-    </div>
-    <div class="info-card">
-      <span class="label">CURRENT FOCUS</span>
-      <h3>Data + AI</h3>
-      <p>Machine learning, analytics, practical AI applications, and real-world projects.</p>
-      <small>Learning by building</small>
-    </div>
+      <p>Currently pursuing • 3rd year</p>
+      <p><b>Current focus:</b> Data + AI — learning by building.</p>
+    </article>
+
+    <article class="win skills">
+      <span class="tag">Skills Mastery</span>
+      <ul>
+        <li>Data cleaning &amp; analysis</li>
+        <li>Visualization &amp; dashboards</li>
+        <li>Machine learning</li>
+        <li>Classification, regression, clustering</li>
+        <li>Forecasting (Prophet, Statsmodels)</li>
+        <li>Time-series &amp; backtesting</li>
+        <li>Supabase &amp; Computer Vision</li>
+        <li>Applied AI</li>
+      </ul>
+    </article>
   </div>
 </section>
+<div class="ticker" aria-hidden="true"><div data-t="Missions"></div></div>
 
-<section id="skills" class="section">
-  <div class="section-label">02 / TECHNICAL SKILLS</div>
-  <h2>Tools I use to<br><span>build & analyze.</span></h2>
+<section id="projects">
+  <h2 class="lvl">Level<br>02</h2>
+  <p class="sub">Missions: projects that solve problems</p>
+  <div class="quests">
 
-  <div class="skills-grid">
-    <div class="skill-card">
-      <span>01</span><h3>Programming & Data</h3>
-      <p>Python • Pandas • NumPy • SQL</p>
-    </div>
-    <div class="skill-card">
-      <span>02</span><h3>Machine Learning</h3>
-      <p>Scikit-learn • Classification • Regression • Clustering</p>
-    </div>
-    <div class="skill-card">
-      <span>03</span><h3>Analytics & Visualization</h3>
-      <p>Matplotlib • Seaborn • Plotly • Exploratory Data Analysis • Dashboards</p>
-    </div>
-    <div class="skill-card">
-      <span>04</span><h3>Forecasting</h3>
-      <p>Prophet • Statsmodels • Time-series Analysis • Backtesting</p>
-    </div>
-    <div class="skill-card">
-      <span>05</span><h3>AI & Applications</h3>
-      <p>Streamlit • Supabase • Computer Vision • Applied AI</p>
-    </div>
-    <div class="skill-card">
-      <span>06</span><h3>Tools</h3>
-      <p>Jupyter Notebook • Git • GitHub</p>
-    </div>
+    <article class="win quest boss">
+      <span class="n">BOSS</span>
+      <span class="tag">InsightFlow: Data Whisperer</span>
+      <p><strong>Auto data-analysis web app</strong></p>
+      <p>Upload any dataset and get cleaning, profiling, charts, dashboards, AI insights and predictions, all explained in plain language.</p>
+      <div class="chips"><i>Python</i><i>Streamlit</i><i>Pandas</i><i>Plotly</i><i>AI</i></div>
+      <a class="mini" href="https://github.com/aida214/InsightFlow" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">IN PROGRESS</span>
+      <span class="tag">Lumi: AI Closet Stylist</span>
+      <p><strong>AI wardrobe &amp; outfit app</strong></p>
+      <p>Organize your clothes, explore outfit combinations, save looks and get personalized styling recommendations.</p>
+      <div class="chips"><i>Python</i><i>Streamlit</i><i>AI</i><i>Supabase</i><i>Computer Vision</i></div>
+      <a class="mini" href="https://github.com/aida214/Lumi-AI-Closet" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">02</span>
+      <span class="tag">Loan Risk Radar</span>
+      <p><strong>Loan default prediction (ML)</strong></p>
+      <p>Compared classification models, including Random Forest, to predict which borrowers will default: cleaning, EDA, feature engineering, tuning.</p>
+      <div class="chips"><i>Python</i><i>Pandas</i><i>Scikit-learn</i><i>Random Forest</i></div>
+      <a class="mini" href="https://github.com/aida214/Bank-Loan-Default-Prediction" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">03</span>
+      <span class="tag">Crystal Ball: Sales Forecast</span>
+      <p><strong>Sales &amp; revenue forecasting</strong></p>
+      <p>Prophet model with promotion and holiday effects plus backtesting. Final MAPE of <strong>1.88%</strong> on a 90-day holdout.</p>
+      <div class="chips"><i>Python</i><i>Pandas</i><i>Prophet</i><i>Matplotlib</i></div>
+      <a class="mini" href="https://github.com/aida214/Sales-Revenue-Trend-Forecasting" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">04</span>
+      <span class="tag">Customer Tribe Finder</span>
+      <p><strong>Customer segmentation (K-Means)</strong></p>
+      <p>Grouped customers by spending and purchase behavior, using the Elbow Method to choose the number of clusters.</p>
+      <div class="chips"><i>Python</i><i>Pandas</i><i>Scikit-learn</i><i>Matplotlib</i></div>
+      <a class="mini" href="https://github.com/aida214/Customer-segmentation-KMeans" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">05</span>
+      <span class="tag">House Price Detective</span>
+      <p><strong>Housing price regression</strong></p>
+      <p>Studied how rooms, lower-status population and pupil-teacher ratio drive price, then built and evaluated a regression model.</p>
+      <div class="chips"><i>Python</i><i>Scikit-learn</i><i>Pandas</i><i>Matplotlib</i></div>
+      <a class="mini" href="https://github.com/aida214/BoustonHousing_RegressionProject" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
+
+    <article class="win quest">
+      <span class="n">06</span>
+      <span class="tag">Sales Seasons Decoder</span>
+      <p><strong>Sales trend &amp; seasonality analysis</strong></p>
+      <p>Analyzed sales data to find trends, seasonal patterns and shifts in business performance over time.</p>
+      <div class="chips"><i>Python</i><i>Pandas</i><i>Matplotlib</i><i>Statsmodels</i></div>
+      <a class="mini" href="https://github.com/aida214/Sales-Trend-Seasonality-Analysis" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
   </div>
 </section>
+<div class="coins" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="ground"></div>
+<div class="ticker" aria-hidden="true"><div data-t="Quest Log"></div></div>
 
-<section id="projects" class="section projects">
-  <div class="section-label">03 / FEATURED PROJECTS</div>
-  <div class="section-heading">
-    <h2>Projects that<br><span>solve problems.</span></h2>
-    <p>A collection of analytics, machine-learning, forecasting, and AI applications.</p>
-  </div>
+<section id="experience">
+  <h2 class="lvl">Level<br>03</h2>
+  <p class="sub">Quest log: current internship</p>
+  <article class="win kv">
+    <span class="tag">Data Science Intern</span>
+    <p><b>SafeX Solutions</b></p>
+    <p>Gaining practical experience and applying data skills in a professional environment.</p>
+    <p>Practical exposure • Professional environment • Continuous learning</p>
+  </article>
 
-  <div class="project-grid">
+  <p class="sub" style="margin-top:44px">Power-ups: always learning</p>
+  <div class="power"><span>Machine Learning</span><span>AI Applications</span><span>Data Analytics</span><span>Real-Time ML</span><span>AI Automation</span><span>n8n</span></div>
 
-    <article class="project featured">
-      <div class="project-top"><span>01</span><strong>✦</strong></div>
-      <p class="project-type">DATA ANALYTICS • AI</p>
-      <h3>InsightFlow</h3>
-      <p>
-        An interactive data-analysis platform where users upload a dataset and automatically
-        receive data cleaning, dataset profiling, charts and visualizations, dashboards,
-        AI-generated insights, predictions, and easy-to-understand explanations — turning
-        core data-science skills into a real, usable application.
-      </p>
-      <div class="tags"><span>Python</span><span>Streamlit</span><span>Pandas</span><span>Plotly</span><span>AI</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project">
-      <div class="project-top"><span>02</span><strong>⌁</strong></div>
-      <p class="project-type">AI • APPLICATION • IN DEVELOPMENT</p>
-      <h3>Lumi Closet</h3>
-      <p>
-        An AI-powered virtual wardrobe and styling application where users can organize their
-        clothing collection, explore outfit combinations, save looks, and receive personalized
-        styling recommendations — combining application development, AI, and database integration.
-      </p>
-      <div class="tags"><span>Python</span><span>Streamlit</span><span>AI</span><span>Supabase</span><span>Computer Vision</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project">
-      <div class="project-top"><span>03</span><strong>↗</strong></div>
-      <p class="project-type">TIME SERIES • FORECASTING</p>
-      <h3>Sales Forecasting & Trend Analysis</h3>
-      <p>
-        Built a time-series forecasting workflow using Prophet, including promotion and holiday
-        effects, trend/seasonality analysis, and backtesting. Evaluated the model on a 90-day
-        holdout set, reaching a final MAPE of <b>1.88%</b>.
-      </p>
-      <div class="tags"><span>Python</span><span>Pandas</span><span>Prophet</span><span>Matplotlib</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project">
-      <div class="project-top"><span>04</span><strong>⌁</strong></div>
-      <p class="project-type">MACHINE LEARNING • CLASSIFICATION</p>
-      <h3>Bank Loan Default Prediction</h3>
-      <p>
-        Built and compared machine-learning classification models, including Random Forest,
-        to predict loan defaults — covering data cleaning, exploratory analysis, feature engineering,
-        model comparison, evaluation, and hyperparameter tuning.
-      </p>
-      <div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Random Forest</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project">
-      <div class="project-top"><span>05</span><strong>◌</strong></div>
-      <p class="project-type">UNSUPERVISED ML • CLUSTERING</p>
-      <h3>Customer Segmentation using K-Means</h3>
-      <p>
-        Segmented customers by spending behavior and purchasing patterns using K-Means clustering,
-        including exploratory data analysis and the Elbow Method to determine the optimal number
-        of clusters, with visualized customer groups.
-      </p>
-      <div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Matplotlib</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project">
-      <div class="project-top"><span>06</span><strong>⌂</strong></div>
-      <p class="project-type">REGRESSION • PREDICTIVE MODELING</p>
-      <h3>Boston Housing Price Prediction</h3>
-      <p>
-        Explored relationships between housing features and property prices — including average
-        rooms, lower-status population percentage, and pupil-teacher ratio — and built a
-        regression-based predictive workflow with model evaluation and visual analysis.
-      </p>
-      <div class="tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>Matplotlib</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-    <article class="project additional">
-      <div class="project-top"><span>07</span><strong>◒</strong></div>
-      <p class="project-type">DATA ANALYTICS • TIME SERIES</p>
-      <h3>Sales Trend & Seasonality Analysis</h3>
-      <p>
-        Analyzed sales data to identify trends, seasonal patterns, and shifts in business
-        performance over time.
-      </p>
-      <div class="tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span><span>Statsmodels</span></div>
-      <a href="#" class="project-link">View project ↗</a>
-    </article>
-
-  </div>
+  <div class="goal">FINAL GOAL: Grow as a data professional by building technology that connects data with real-world needs.</div>
 </section>
 
-<section id="experience" class="section">
-  <div class="section-label">04 / EXPERIENCE</div>
-  <div class="experience-card">
+<section id="contact">
+  <div class="cta-row">
     <div>
-      <p class="project-type">CURRENT INTERNSHIP</p>
-      <h2>Data Science<br><span>Intern</span></h2>
+      <h2 class="lvl">Continue?</h2>
+      <p class="sub">Interested in data, AI, analytics or collaboration? Find me online.</p>
+      <div class="contact">
+        <a class="btn" href="https://github.com/aida214">GITHUB</a>
+        <a class="btn pink" href="mailto:aiydasyed@gmail.com">GMAIL</a>
+      </div>
     </div>
-    <div class="experience-content">
-      <h3>SafeX Solutions</h3>
-      <p>
-        Currently completing an internship focused on gaining practical experience and applying
-        data-related skills in a professional environment.
-      </p>
-      <div class="experience-note">Practical exposure • Professional environment • Continuous learning</div>
-    </div>
+    <div class="door" aria-hidden="true"></div>
   </div>
 </section>
 
-<section class="section interests">
-  <div class="section-label">05 / CURRENT LEARNING & INTERESTS</div>
-  <div class="interest-layout">
-    <h2>Always<br><span>learning.</span></h2>
-    <div class="interest-tags">
-      <span>Machine Learning</span>
-      <span>AI Applications</span>
-      <span>Data Analytics</span>
-      <span>Real-Time ML</span>
-      <span>AI Automation</span>
-      <span>n8n</span>
-    </div>
-  </div>
-</section>
+<footer>Aiyda Syed • Data Science Portfolio © 2026</footer>
 
-<section class="goal">
-  <div>
-    <p class="eyebrow">MY GOAL</p>
-    <h2>Growing as a data professional by building technology that connects <span>data with real-world needs.</span></h2>
-  </div>
-</section>
-
-<section id="contact" class="section contact">
-  <div class="section-label">06 / CONTACT</div>
-  <div class="two-column">
-    <div>
-      <h2>Let's<br><span>connect.</span></h2>
-      <p class="contact-description">
-        Interested in data, AI, analytics, or collaboration? Find me online.
-      </p>
-    </div>
-    <div class="contact-links">
-      <a href="https://github.com/aida214" target="_blank">GitHub <span>aida214 ↗</span></a>
-      <a href="mailto:aiydasyed@gmail.com">Gmail <span>aiydasyed@gmail.com ↗</span></a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <span>Aiyda Syed • Data Science Portfolio</span>
-  <span>© 2026</span>
-</footer>
-
+<script>
+/* tiny pixel-sprite renderer: each map row is a string, each letter a palette colour */
+var S={
+ girl:{p:{h:'#4a2616',s:'#d8905a',b:'#ff8fd0',w:'#ffffff',g:'#2fbf5f',e:'#2b1030',m:'#c0405a'},
+  m:["....hhhhb...","...hhhhhhb..","..hhhhhhhh..","..hsssssshh.","..hsesseshh.","..hssssssh..","..hhsmmshh..","...hwwwwhh..","..swwwwwws..","..swwwwwws..","...gggggg...","..gggggggg..","...ss..ss...","...ww..ww..."]},
+ cat:{p:{w:'#ffffff',e:'#6b6bff'},
+  m:["w.w.......","wwwww....w","wewew...ww","wwwwwwwww.","wwwwwwwww.",".w.w..w.w."]},
+ cloud:{p:{w:'#f2e6ff',p:'#d79bff'},
+  m:["......wwww......","...wwwwwwwwww...",".wwwwwwwwwwwwww.","pppppppppppppppp"]},
+ heart:{p:{r:'#ff2e9a'},m:[".rr.rr.","rrrrrrr","rrrrrrr",".rrrrr.","..rrr..","...r..."]}
+};
+document.querySelectorAll('svg[data-s]').forEach(function(el){
+  var d=S[el.dataset.s],px=+el.dataset.px||6,m=d.m,w=m[0].length,h='';
+  m.forEach(function(row,y){for(var x=0;x<w;x++){var c=d.p[row[x]];if(c)h+='<rect x="'+x*px+'" y="'+y*px+'" width="'+px+'" height="'+px+'" fill="'+c+'"/>'}});
+  el.setAttribute('width',w*px);el.setAttribute('height',m.length*px);
+  el.setAttribute('viewBox','0 0 '+w*px+' '+m.length*px);el.innerHTML=h;
+});
+document.querySelectorAll('[data-t]').forEach(function(el){
+  var u='',i;for(i=0;i<12;i++)u+='<span>'+el.dataset.t+'</span><b>★</b>';
+  el.innerHTML=u+u;
+});
+</script>
 </body>
 </html>
