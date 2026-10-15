@@ -18,14 +18,19 @@
 html{scroll-behavior:smooth}
 body{
   background:#05020c;color:#fff;font-family:var(--vt);font-size:22px;line-height:1.15;
-  background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px);
-  background-size:46px 46px,29px 29px;background-position:0 0,13px 21px;
+  background-image:
+    radial-gradient(#ffffff55 1px,transparent 1.5px),
+    radial-gradient(#ffffff33 1px,transparent 1.5px),
+    radial-gradient(circle at 20% 30%, rgba(255,46,154,0.07) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(61,255,143,0.06) 0%, transparent 35%);
+  background-size:46px 46px,29px 29px,100% 100%,100% 100%;
+  background-position:0 0,13px 21px,0 0,0 0;
   overflow-x:hidden;image-rendering:pixelated;
-  animation:bg-shift 20s ease-in-out infinite alternate;
+  animation:bg-shift 22s ease-in-out infinite alternate;
 }
 @keyframes bg-shift{
-  0%{background-position:0 0,13px 21px}
-  100%{background-position:23px 23px,36px 44px}
+  0%{background-position:0 0,13px 21px,0 0,0 0}
+  100%{background-position:23px 23px,36px 44px,10px -10px,-15px 15px}
 }
 a{color:inherit}
 :focus-visible{outline:3px dashed var(--sun);outline-offset:3px}
@@ -37,21 +42,28 @@ svg.sp{display:block;shape-rendering:crispEdges}
 .hud .hp{display:flex;align-items:center;gap:8px}
 .bar{width:90px;height:8px;background:#fff;position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 22% 0 0;background:var(--mint);
-  animation:hp-pulse 2.5s ease-in-out infinite}
+  animation:hp-pulse 2.2s ease-in-out infinite}
 @keyframes hp-pulse{
-  0%,100%{opacity:1;filter:brightness(1)}
-  50%{opacity:0.85;filter:brightness(1.25)}
+  0%,100%{opacity:1;filter:brightness(1);box-shadow:none}
+  50%{opacity:0.9;filter:brightness(1.35);box-shadow:0 0 8px var(--mint)}
 }
 
 /* ticker */
-.ticker{background:var(--blue);overflow:hidden;white-space:nowrap;border-top:4px solid #a9a9ff;font:16px var(--px);color:#fff;padding:14px 0}
+.ticker{background:var(--blue);overflow:hidden;white-space:nowrap;border-top:4px solid #a9a9ff;font:16px var(--px);color:#fff;padding:14px 0;
+  position:relative}
+.ticker::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+  animation:ticker-shine 4.5s linear infinite;
+}
+@keyframes ticker-shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .ticker div{display:inline-block;animation:slide 28s linear infinite}
 .ticker span{margin:0 26px}
-.ticker b{color:var(--sun);animation:star-twinkle 1.4s steps(2) infinite}
+.ticker b{color:var(--sun);animation:star-twinkle 1.3s steps(2) infinite}
 @keyframes slide{to{transform:translateX(-50%)}}
 @keyframes star-twinkle{
   0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.55;transform:scale(0.9)}
+  50%{opacity:0.45;transform:scale(0.85)}
 }
 
 /* ground */
@@ -63,38 +75,55 @@ svg.sp{display:block;shape-rendering:crispEdges}
 /* hero */
 .hero{position:relative;padding:20px 20px 0;max-width:1100px;margin:0 auto}
 .frame{border:3px solid var(--mint);border-radius:28px;background:#000;text-align:center;padding:70px 16px 60px;min-height:340px;
-  animation:frame-glow 3s ease-in-out infinite alternate, fade-up 0.9s ease-out}
+  animation:frame-glow 3.2s ease-in-out infinite alternate, fade-up 0.9s ease-out;
+  position:relative;overflow:hidden}
+.frame::before{
+  content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(61,255,143,0.08),transparent 30%);
+  animation:frame-spin 12s linear infinite;pointer-events:none;
+}
+@keyframes frame-spin{to{transform:rotate(360deg)}}
 @keyframes frame-glow{
-  0%{box-shadow:0 0 0 0 transparent, 0 0 12px rgba(61,255,143,0.15)}
-  100%{box-shadow:0 0 0 3px rgba(61,255,143,0.25), 0 0 28px rgba(61,255,143,0.35)}
+  0%{box-shadow:0 0 0 0 transparent, 0 0 14px rgba(61,255,143,0.18)}
+  100%{box-shadow:0 0 0 4px rgba(61,255,143,0.3), 0 0 36px rgba(61,255,143,0.4)}
 }
 .frame h1{font:clamp(24px,6.6vw,66px) var(--px);color:var(--pink);text-shadow:5px 5px 0 var(--mint);line-height:1.25;
-  animation:title-pop 1.1s cubic-bezier(0.22,1,0.36,1)}
+  animation:title-pop 1.15s cubic-bezier(0.22,1,0.36,1);position:relative;z-index:1}
 .frame h2{font:clamp(14px,3.3vw,32px) var(--px);color:var(--mint);text-shadow:3px 3px 0 #0b5a2c;margin:26px 0 20px;line-height:1.5;
-  animation:fade-up 1s ease-out 0.15s both}
+  animation:fade-up 1s ease-out 0.15s both;position:relative;z-index:1}
 .frame .tl{font:clamp(20px,3.2vw,32px) var(--vt);line-height:1.2;margin-bottom:30px;
-  animation:fade-up 1s ease-out 0.3s both}
+  animation:fade-up 1s ease-out 0.3s both;position:relative;z-index:1}
 .frame .tl span{display:block}
 .frame .tl .a{color:var(--sun)}
 .frame .tl .b{color:var(--lav)}
 .btn{display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;background:#22d46e;border:3px solid var(--mint);border-radius:8px;padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48;
   transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
-  animation:fade-up 1s ease-out 0.45s both}
-.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48;filter:brightness(1.12)}
+  animation:fade-up 1s ease-out 0.45s both;position:relative;overflow:hidden;z-index:1}
+.btn::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);
+  transform:skewX(-18deg);transition:left 0.45s ease;
+}
+.btn:hover::after{left:120%}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48;filter:brightness(1.15)}
 .btn:active{transform:translateY(5px);box-shadow:0 0 0 #138c48}
 .btn.pink{background:var(--pink);border-color:#ff7cc3;box-shadow:0 5px 0 #a3105f;text-shadow:2px 2px 0 #a3105f}
 .btn.pink:hover{box-shadow:0 2px 0 #a3105f}
 
-.hero .player{position:absolute;left:3%;bottom:-2px}
-.hero .cat{position:absolute;right:20%;bottom:-2px}
-.hero .cloud{position:absolute;top:-6px;animation:cloud-drift 8s ease-in-out infinite alternate}
-.hero .cloud:nth-of-type(2){animation-duration:11s;animation-delay:-3s}
+.hero .player{position:absolute;left:3%;bottom:-2px;filter:drop-shadow(0 0 6px rgba(255,143,208,0.35))}
+.hero .cat{position:absolute;right:20%;bottom:-2px;filter:drop-shadow(0 0 6px rgba(107,107,255,0.3))}
+.hero .cloud{position:absolute;top:-6px;animation:cloud-drift 9s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 8px rgba(215,155,255,0.25))}
+.hero .cloud:nth-of-type(2){animation-duration:12s;animation-delay:-3.5s}
 @keyframes cloud-drift{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(18px)}
+  0%{transform:translateX(0) translateY(0)}
+  50%{transform:translateX(12px) translateY(-3px)}
+  100%{transform:translateX(22px) translateY(0)}
 }
-.walk{animation:bob 1s steps(2) infinite}
-@keyframes bob{50%{transform:translateY(-4px)}}
+.walk{animation:bob 0.9s steps(2) infinite}
+@keyframes bob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
 
 /* sections */
 section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
@@ -104,9 +133,9 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 
 /* windows */
 .win{background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38;
-  transition:transform 0.2s steps(2), box-shadow 0.2s steps(2);
-  animation:card-in 0.7s cubic-bezier(0.22,1,0.36,1) both}
-.win:hover{transform:translate(-2px,-3px);box-shadow:9px 9px 0 #5a0a38}
+  transition:transform 0.22s steps(2), box-shadow 0.22s steps(2), filter 0.25s;
+  animation:card-in 0.75s cubic-bezier(0.22,1,0.36,1) both}
+.win:hover{transform:translate(-3px,-4px) rotate(-0.4deg);box-shadow:10px 10px 0 #5a0a38;filter:brightness(1.03)}
 .win::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:var(--pink);
   background-image:linear-gradient(90deg,transparent 0 6px,#ffb3de 6px 14px,transparent 14px),linear-gradient(90deg,transparent calc(100% - 52px),#ffb3de calc(100% - 52px) calc(100% - 44px),transparent calc(100% - 44px) calc(100% - 30px),#ffb3de calc(100% - 30px) calc(100% - 22px),transparent calc(100% - 22px));
   background-size:100% 8px,100% 8px;background-repeat:no-repeat;background-position:0 7px,0 7px}
@@ -123,46 +152,70 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .consolewrap{display:flex;justify-content:center;grid-column:2;grid-row:1}
 .hello{grid-column:3;grid-row:1}
 .console{width:100%;max-width:360px;background:#ff1493;border:4px solid #b30d6c;border-radius:20px 20px 12px 12px;padding:12px;box-shadow:inset -6px -6px 0 #c70f78,6px 6px 0 #5a0a38;
-  animation:console-float 3.5s ease-in-out infinite}
+  animation:console-float 3.2s ease-in-out infinite;position:relative}
+.console::after{
+  content:"";position:absolute;inset:8px;border-radius:14px;pointer-events:none;
+  box-shadow:0 0 20px rgba(255,20,147,0.25);opacity:0.6;
+  animation:console-aura 2.8s ease-in-out infinite alternate;
+}
+@keyframes console-aura{0%{opacity:0.35}100%{opacity:0.75}}
 @keyframes console-float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
+  50%{transform:translateY(-8px)}
 }
 .screen{background:#3b3b46;border-radius:10px 10px 4px 4px;padding:16px;display:flex;justify-content:center}
 .screen div{background:#2e7d4a;border:3px solid #222;padding:10px 20px 0;position:relative}
 .pad{margin-top:12px;height:100px;background:#ff8cc8;border:4px solid #b30d6c;border-radius:6px;background-image:linear-gradient(#ff5fb0 2px,transparent 2px),linear-gradient(90deg,#ff5fb0 2px,transparent 2px);background-size:25% 33.3%}
 .btns{display:flex;justify-content:space-between;padding:10px 6px 0}
 .btns i{width:16px;height:16px;border-radius:50%;background:#ffd0ea;border:2px solid #b30d6c;
-  animation:btn-blink 2s steps(2) infinite}
-.btns i:nth-child(2){animation-delay:0.4s}
-.btns i:nth-child(3){animation-delay:0.8s}
+  animation:btn-blink 1.8s steps(2) infinite}
+.btns i:nth-child(2){animation-delay:0.35s}
+.btns i:nth-child(3){animation-delay:0.7s}
 @keyframes btn-blink{
-  0%,100%{opacity:1}
-  50%{opacity:0.45}
+  0%,100%{opacity:1;box-shadow:0 0 0 transparent}
+  50%{opacity:0.4;box-shadow:0 0 6px #ffd0ea}
 }
 .weap{grid-column:1}.log{grid-column:2}.skills{grid-column:3}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tiles span{background:#1a0a22;color:var(--mint);font:11px var(--px);text-align:center;padding:14px 4px;border-radius:8px;border:2px solid var(--pink);line-height:1.5;
-  transition:transform 0.15s steps(2), background 0.2s, color 0.2s}
-.tiles span:hover{transform:scale(1.06);background:#2a1235;color:var(--sun)}
+  transition:transform 0.15s steps(2), background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor:default}
+.tiles span:hover{transform:scale(1.08) translateY(-2px);background:#2a1235;color:var(--sun);
+  box-shadow:0 0 12px rgba(255,228,94,0.35)}
 
-/* missions */
-.quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px 26px;margin-top:26px}
+/* missions — FIXED ALIGNMENT */
+.quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px 26px;margin-top:26px;align-items:stretch}
+.quest{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
 .quest .n{position:absolute;right:10px;top:-2px;font:11px var(--px);color:#fff;z-index:1;line-height:22px}
+.quest p{flex-shrink:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
 .chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px;
-  transition:transform 0.15s steps(2)}
-.chips i:hover{transform:translateY(-2px)}
+  transition:transform 0.15s steps(2), box-shadow 0.2s}
+.chips i:hover{transform:translateY(-3px);box-shadow:0 4px 0 rgba(0,0,0,0.3)}
 .mini{font:11px var(--px);text-decoration:none;color:#fff;background:var(--blue);padding:10px 12px;border:2px solid #a9a9ff;box-shadow:0 3px 0 #3a3ab0;display:inline-block;
-  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s}
-.mini:hover{transform:translateY(2px);box-shadow:0 1px 0 #3a3ab0;filter:brightness(1.15)}
-.quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00;
-  animation:boss-glow 2.8s ease-in-out infinite alternate, card-in 0.7s cubic-bezier(0.22,1,0.36,1) both}
-@keyframes boss-glow{
-  0%{box-shadow:6px 6px 0 #6b5a00, 0 0 8px rgba(255,228,94,0.2)}
-  100%{box-shadow:6px 6px 0 #6b5a00, 0 0 22px rgba(255,228,94,0.45)}
+  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
+  margin-top:auto;           /* ← pushes every GitHub button to the same bottom line */
+  align-self:flex-start;
+  position:relative;overflow:hidden}
+.mini::after{
+  content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  transform:skewX(-16deg);transition:left 0.4s ease;
 }
-.quest.boss:hover{box-shadow:9px 9px 0 #6b5a00, 0 0 28px rgba(255,228,94,0.55)}
+.mini:hover::after{left:130%}
+.mini:hover{transform:translateY(2px);box-shadow:0 1px 0 #3a3ab0;filter:brightness(1.18)}
+
+.quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00;
+  animation:boss-glow 2.6s ease-in-out infinite alternate, card-in 0.75s cubic-bezier(0.22,1,0.36,1) both}
+@keyframes boss-glow{
+  0%{box-shadow:6px 6px 0 #6b5a00, 0 0 10px rgba(255,228,94,0.25)}
+  100%{box-shadow:6px 6px 0 #6b5a00, 0 0 28px rgba(255,228,94,0.55), 0 0 48px rgba(255,228,94,0.2)}
+}
+.quest.boss:hover{box-shadow:10px 10px 0 #6b5a00, 0 0 36px rgba(255,228,94,0.65)}
 
 /* staggered card entrance */
 .l1 .win:nth-child(1){animation-delay:0.05s}
@@ -181,11 +234,11 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .quests .quest:nth-child(8){animation-delay:0.40s}
 
 @keyframes card-in{
-  from{opacity:0;transform:translateY(18px) scale(0.97)}
+  from{opacity:0;transform:translateY(22px) scale(0.96)}
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 @keyframes fade-up{
-  from{opacity:0;transform:translateY(14px)}
+  from{opacity:0;transform:translateY(16px)}
   to{opacity:1;transform:translateY(0)}
 }
 @keyframes fade-in{
@@ -193,48 +246,57 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
   to{opacity:1}
 }
 @keyframes title-pop{
-  0%{opacity:0;transform:scale(0.85);filter:blur(2px)}
-  70%{transform:scale(1.03)}
+  0%{opacity:0;transform:scale(0.82);filter:blur(3px)}
+  65%{transform:scale(1.04)}
   100%{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
 /* misc */
 .power{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .power span{font:12px var(--px);background:#000;border:3px solid var(--mint);color:var(--mint);padding:12px 14px;border-radius:10px;box-shadow:3px 3px 0 #0b5a2c;
-  transition:transform 0.15s steps(2), box-shadow 0.15s steps(2), color 0.2s;
-  animation:card-in 0.6s ease-out both}
+  transition:transform 0.15s steps(2), box-shadow 0.15s steps(2), color 0.2s, filter 0.2s;
+  animation:card-in 0.65s ease-out both}
 .power span:nth-child(1){animation-delay:0.05s}
 .power span:nth-child(2){animation-delay:0.1s}
 .power span:nth-child(3){animation-delay:0.15s}
 .power span:nth-child(4){animation-delay:0.2s}
 .power span:nth-child(5){animation-delay:0.25s}
 .power span:nth-child(6){animation-delay:0.3s}
-.power span:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #0b5a2c;color:var(--sun)}
+.power span:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 #0b5a2c;color:var(--sun);filter:drop-shadow(0 0 6px rgba(255,228,94,0.4))}
 .goal{margin-top:34px;border:3px dashed var(--sun);padding:22px;font:13px var(--px);line-height:1.9;color:var(--sun);
-  animation:goal-pulse 3s ease-in-out infinite}
+  animation:goal-pulse 2.8s ease-in-out infinite;position:relative}
 @keyframes goal-pulse{
   0%,100%{border-color:var(--sun);box-shadow:0 0 0 rgba(255,228,94,0)}
-  50%{border-color:#fff3a0;box-shadow:0 0 16px rgba(255,228,94,0.25)}
+  50%{border-color:#fff3a0;box-shadow:0 0 20px rgba(255,228,94,0.3)}
 }
 .contact{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px}
 .door{width:64px;height:90px;background:#9b5b2a;border:6px solid #8d8d9a;border-bottom:0;border-radius:32px 32px 0 0;position:relative;margin-left:auto;
-  animation:door-wiggle 4s ease-in-out infinite}
+  animation:door-wiggle 3.8s ease-in-out infinite}
 .door::after{content:"";position:absolute;right:10px;top:48px;width:8px;height:8px;background:var(--sun);
-  animation:knob-glow 2s ease-in-out infinite}
+  animation:knob-glow 1.8s ease-in-out infinite}
 @keyframes door-wiggle{
   0%,100%{transform:rotate(0deg)}
-  25%{transform:rotate(-1.5deg)}
-  75%{transform:rotate(1.5deg)}
+  20%{transform:rotate(-2deg)}
+  40%{transform:rotate(1.5deg)}
+  60%{transform:rotate(-1deg)}
+  80%{transform:rotate(1deg)}
 }
 @keyframes knob-glow{
-  0%,100%{box-shadow:0 0 0 var(--sun)}
-  50%{box-shadow:0 0 8px 2px var(--sun)}
+  0%,100%{box-shadow:0 0 0 var(--sun);background:var(--sun)}
+  50%{box-shadow:0 0 12px 3px var(--sun);background:#fff3a0}
 }
 .cta-row{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
 .coins{display:flex;gap:26px;padding:20px;justify-content:center;flex-wrap:wrap}
-.coins i{width:20px;height:20px;border-radius:50%;background:#ffb020;border:3px solid #ff8a00;animation:bob 1.2s steps(2) infinite}
-.coins i:nth-child(2n){animation-delay:.4s}
+.coins i{width:20px;height:20px;border-radius:50%;background:#ffb020;border:3px solid #ff8a00;
+  animation:coin-spin 1.4s steps(2) infinite;box-shadow:0 0 8px rgba(255,176,32,0.4)}
+.coins i:nth-child(2n){animation-delay:.35s}
 .coins i:nth-child(3n){animation-delay:.7s}
+@keyframes coin-spin{
+  0%,100%{transform:translateY(0) scaleX(1)}
+  25%{transform:translateY(-6px) scaleX(0.7)}
+  50%{transform:translateY(-4px) scaleX(1)}
+  75%{transform:translateY(-7px) scaleX(0.7)}
+}
 footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 40px;line-height:1.8}
 
 @media(max-width:860px){
