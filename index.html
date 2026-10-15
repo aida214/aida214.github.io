@@ -183,24 +183,48 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .tiles span:hover{transform:scale(1.08) translateY(-2px);background:#2a1235;color:var(--sun);
   box-shadow:0 0 12px rgba(255,228,94,0.35)}
 
-/* missions — FIXED ALIGNMENT */
-.quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px 26px;margin-top:26px;align-items:stretch}
+/* ========== PROJECT CARDS — FIXED BUTTON ALIGNMENT ========== */
+.quests{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:34px 26px;
+  margin-top:26px;
+  align-items:stretch;          /* all cards same height */
+}
 .quest{
   display:flex;
-  flex-direction:column;
-  height:100%;
+  flex-direction:column;        /* stack content vertically */
+  /* no height:100% needed — grid stretch already makes them equal */
 }
 .quest .n{position:absolute;right:10px;top:-2px;font:11px var(--px);color:#fff;z-index:1;line-height:22px}
 .quest p{flex-shrink:0}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:10px 0 14px;
+  flex-shrink:0;
+}
 .chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px;
   transition:transform 0.15s steps(2), box-shadow 0.2s}
 .chips i:hover{transform:translateY(-3px);box-shadow:0 4px 0 rgba(0,0,0,0.3)}
-.mini{font:11px var(--px);text-decoration:none;color:#fff;background:var(--blue);padding:10px 12px;border:2px solid #a9a9ff;box-shadow:0 3px 0 #3a3ab0;display:inline-block;
-  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
-  margin-top:auto;           /* ← pushes every GitHub button to the same bottom line */
+
+/* THIS is the key: button always sticks to the bottom */
+.mini{
+  font:11px var(--px);
+  text-decoration:none;
+  color:#fff;
+  background:var(--blue);
+  padding:10px 12px;
+  border:2px solid #a9a9ff;
+  box-shadow:0 3px 0 #3a3ab0;
+  display:inline-block;
+  margin-top:auto;              /* ← pushes every button to the same bottom line */
   align-self:flex-start;
-  position:relative;overflow:hidden}
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
+}
 .mini::after{
   content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
@@ -481,7 +505,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
 </section>
 <footer>Aiyda Syed • Data Science Portfolio © 2026</footer>
 <script>
-/* tiny pixel-sprite renderer: each map row is a string, each letter a palette colour */
 var S={
  girl:{p:{h:'#4a2616',s:'#d8905a',b:'#ff8fd0',w:'#ffffff',g:'#2fbf5f',e:'#2b1030',m:'#c0405a'},
   m:["....hhhhb...","...hhhhhhb..","..hhhhhhhh..","..hsssssshh.","..hsesseshh.","..hssssssh..","..hhsmmshh..","...hwwwwhh..","..swwwwwws..","..swwwwwws..","...gggggg...","..gggggggg..","...ss..ss...","...ww..ww..."]},
