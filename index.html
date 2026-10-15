@@ -21,23 +21,38 @@ body{
   background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px);
   background-size:46px 46px,29px 29px;background-position:0 0,13px 21px;
   overflow-x:hidden;image-rendering:pixelated;
+  animation:bg-shift 20s ease-in-out infinite alternate;
+}
+@keyframes bg-shift{
+  0%{background-position:0 0,13px 21px}
+  100%{background-position:23px 23px,36px 44px}
 }
 a{color:inherit}
 :focus-visible{outline:3px dashed var(--sun);outline-offset:3px}
 svg.sp{display:block;shape-rendering:crispEdges}
 
 /* HUD */
-.hud{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;font:10px var(--px);color:var(--pink)}
+.hud{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;font:10px var(--px);color:var(--pink);
+  animation:fade-in 0.8s ease-out}
 .hud .hp{display:flex;align-items:center;gap:8px}
-.bar{width:90px;height:8px;background:#fff;position:relative}
-.bar i{position:absolute;inset:0 22% 0 0;background:var(--mint)}
+.bar{width:90px;height:8px;background:#fff;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 22% 0 0;background:var(--mint);
+  animation:hp-pulse 2.5s ease-in-out infinite}
+@keyframes hp-pulse{
+  0%,100%{opacity:1;filter:brightness(1)}
+  50%{opacity:0.85;filter:brightness(1.25)}
+}
 
 /* ticker */
 .ticker{background:var(--blue);overflow:hidden;white-space:nowrap;border-top:4px solid #a9a9ff;font:16px var(--px);color:#fff;padding:14px 0}
 .ticker div{display:inline-block;animation:slide 28s linear infinite}
 .ticker span{margin:0 26px}
-.ticker b{color:var(--sun)}
+.ticker b{color:var(--sun);animation:star-twinkle 1.4s steps(2) infinite}
 @keyframes slide{to{transform:translateX(-50%)}}
+@keyframes star-twinkle{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.55;transform:scale(0.9)}
+}
 
 /* ground */
 .ground{height:26px;background:
@@ -47,20 +62,37 @@ svg.sp{display:block;shape-rendering:crispEdges}
 
 /* hero */
 .hero{position:relative;padding:20px 20px 0;max-width:1100px;margin:0 auto}
-.frame{border:3px solid var(--mint);border-radius:28px;background:#000;text-align:center;padding:70px 16px 60px;min-height:340px}
-.frame h1{font:clamp(24px,6.6vw,66px) var(--px);color:var(--pink);text-shadow:5px 5px 0 var(--mint);line-height:1.25}
-.frame h2{font:clamp(14px,3.3vw,32px) var(--px);color:var(--mint);text-shadow:3px 3px 0 #0b5a2c;margin:26px 0 20px;line-height:1.5}
-.frame .tl{font:clamp(20px,3.2vw,32px) var(--vt);line-height:1.2;margin-bottom:30px}
+.frame{border:3px solid var(--mint);border-radius:28px;background:#000;text-align:center;padding:70px 16px 60px;min-height:340px;
+  animation:frame-glow 3s ease-in-out infinite alternate, fade-up 0.9s ease-out}
+@keyframes frame-glow{
+  0%{box-shadow:0 0 0 0 transparent, 0 0 12px rgba(61,255,143,0.15)}
+  100%{box-shadow:0 0 0 3px rgba(61,255,143,0.25), 0 0 28px rgba(61,255,143,0.35)}
+}
+.frame h1{font:clamp(24px,6.6vw,66px) var(--px);color:var(--pink);text-shadow:5px 5px 0 var(--mint);line-height:1.25;
+  animation:title-pop 1.1s cubic-bezier(0.22,1,0.36,1)}
+.frame h2{font:clamp(14px,3.3vw,32px) var(--px);color:var(--mint);text-shadow:3px 3px 0 #0b5a2c;margin:26px 0 20px;line-height:1.5;
+  animation:fade-up 1s ease-out 0.15s both}
+.frame .tl{font:clamp(20px,3.2vw,32px) var(--vt);line-height:1.2;margin-bottom:30px;
+  animation:fade-up 1s ease-out 0.3s both}
 .frame .tl span{display:block}
 .frame .tl .a{color:var(--sun)}
 .frame .tl .b{color:var(--lav)}
-.btn{display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;background:#22d46e;border:3px solid var(--mint);border-radius:8px;padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48}
-.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48}
+.btn{display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;background:#22d46e;border:3px solid var(--mint);border-radius:8px;padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48;
+  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
+  animation:fade-up 1s ease-out 0.45s both}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48;filter:brightness(1.12)}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 #138c48}
 .btn.pink{background:var(--pink);border-color:#ff7cc3;box-shadow:0 5px 0 #a3105f;text-shadow:2px 2px 0 #a3105f}
 .btn.pink:hover{box-shadow:0 2px 0 #a3105f}
+
 .hero .player{position:absolute;left:3%;bottom:-2px}
 .hero .cat{position:absolute;right:20%;bottom:-2px}
-.hero .cloud{position:absolute;top:-6px}
+.hero .cloud{position:absolute;top:-6px;animation:cloud-drift 8s ease-in-out infinite alternate}
+.hero .cloud:nth-of-type(2){animation-duration:11s;animation-delay:-3s}
+@keyframes cloud-drift{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(18px)}
+}
 .walk{animation:bob 1s steps(2) infinite}
 @keyframes bob{50%{transform:translateY(-4px)}}
 
@@ -71,7 +103,10 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .name{font:clamp(22px,4.4vw,38px) var(--px);color:var(--mint);line-height:1.2;text-shadow:3px 3px 0 #0b5a2c}
 
 /* windows */
-.win{background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38}
+.win{background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38;
+  transition:transform 0.2s steps(2), box-shadow 0.2s steps(2);
+  animation:card-in 0.7s cubic-bezier(0.22,1,0.36,1) both}
+.win:hover{transform:translate(-2px,-3px);box-shadow:9px 9px 0 #5a0a38}
 .win::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:var(--pink);
   background-image:linear-gradient(90deg,transparent 0 6px,#ffb3de 6px 14px,transparent 14px),linear-gradient(90deg,transparent calc(100% - 52px),#ffb3de calc(100% - 52px) calc(100% - 44px),transparent calc(100% - 44px) calc(100% - 30px),#ffb3de calc(100% - 30px) calc(100% - 22px),transparent calc(100% - 22px));
   background-size:100% 8px,100% 8px;background-repeat:no-repeat;background-position:0 7px,0 7px}
@@ -87,35 +122,119 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .l1 .title{grid-column:1}
 .consolewrap{display:flex;justify-content:center;grid-column:2;grid-row:1}
 .hello{grid-column:3;grid-row:1}
-.console{width:100%;max-width:360px;background:#ff1493;border:4px solid #b30d6c;border-radius:20px 20px 12px 12px;padding:12px;box-shadow:inset -6px -6px 0 #c70f78,6px 6px 0 #5a0a38}
+.console{width:100%;max-width:360px;background:#ff1493;border:4px solid #b30d6c;border-radius:20px 20px 12px 12px;padding:12px;box-shadow:inset -6px -6px 0 #c70f78,6px 6px 0 #5a0a38;
+  animation:console-float 3.5s ease-in-out infinite}
+@keyframes console-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
 .screen{background:#3b3b46;border-radius:10px 10px 4px 4px;padding:16px;display:flex;justify-content:center}
 .screen div{background:#2e7d4a;border:3px solid #222;padding:10px 20px 0;position:relative}
 .pad{margin-top:12px;height:100px;background:#ff8cc8;border:4px solid #b30d6c;border-radius:6px;background-image:linear-gradient(#ff5fb0 2px,transparent 2px),linear-gradient(90deg,#ff5fb0 2px,transparent 2px);background-size:25% 33.3%}
 .btns{display:flex;justify-content:space-between;padding:10px 6px 0}
-.btns i{width:16px;height:16px;border-radius:50%;background:#ffd0ea;border:2px solid #b30d6c}
+.btns i{width:16px;height:16px;border-radius:50%;background:#ffd0ea;border:2px solid #b30d6c;
+  animation:btn-blink 2s steps(2) infinite}
+.btns i:nth-child(2){animation-delay:0.4s}
+.btns i:nth-child(3){animation-delay:0.8s}
+@keyframes btn-blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.45}
+}
 .weap{grid-column:1}.log{grid-column:2}.skills{grid-column:3}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tiles span{background:#1a0a22;color:var(--mint);font:11px var(--px);text-align:center;padding:14px 4px;border-radius:8px;border:2px solid var(--pink);line-height:1.5}
+.tiles span{background:#1a0a22;color:var(--mint);font:11px var(--px);text-align:center;padding:14px 4px;border-radius:8px;border:2px solid var(--pink);line-height:1.5;
+  transition:transform 0.15s steps(2), background 0.2s, color 0.2s}
+.tiles span:hover{transform:scale(1.06);background:#2a1235;color:var(--sun)}
 
 /* missions */
 .quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px 26px;margin-top:26px}
 .quest .n{position:absolute;right:10px;top:-2px;font:11px var(--px);color:#fff;z-index:1;line-height:22px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
-.chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px}
-.mini{font:11px var(--px);text-decoration:none;color:#fff;background:var(--blue);padding:10px 12px;border:2px solid #a9a9ff;box-shadow:0 3px 0 #3a3ab0;display:inline-block}
-.quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00}
+.chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px;
+  transition:transform 0.15s steps(2)}
+.chips i:hover{transform:translateY(-2px)}
+.mini{font:11px var(--px);text-decoration:none;color:#fff;background:var(--blue);padding:10px 12px;border:2px solid #a9a9ff;box-shadow:0 3px 0 #3a3ab0;display:inline-block;
+  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s}
+.mini:hover{transform:translateY(2px);box-shadow:0 1px 0 #3a3ab0;filter:brightness(1.15)}
+.quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00;
+  animation:boss-glow 2.8s ease-in-out infinite alternate, card-in 0.7s cubic-bezier(0.22,1,0.36,1) both}
+@keyframes boss-glow{
+  0%{box-shadow:6px 6px 0 #6b5a00, 0 0 8px rgba(255,228,94,0.2)}
+  100%{box-shadow:6px 6px 0 #6b5a00, 0 0 22px rgba(255,228,94,0.45)}
+}
+.quest.boss:hover{box-shadow:9px 9px 0 #6b5a00, 0 0 28px rgba(255,228,94,0.55)}
+
+/* staggered card entrance */
+.l1 .win:nth-child(1){animation-delay:0.05s}
+.l1 .win:nth-child(2){animation-delay:0.12s}
+.l1 .win:nth-child(3){animation-delay:0.18s}
+.l1 .win:nth-child(4){animation-delay:0.24s}
+.l1 .win:nth-child(5){animation-delay:0.30s}
+.l1 .win:nth-child(6){animation-delay:0.36s}
+.quests .quest:nth-child(1){animation-delay:0.05s}
+.quests .quest:nth-child(2){animation-delay:0.10s}
+.quests .quest:nth-child(3){animation-delay:0.15s}
+.quests .quest:nth-child(4){animation-delay:0.20s}
+.quests .quest:nth-child(5){animation-delay:0.25s}
+.quests .quest:nth-child(6){animation-delay:0.30s}
+.quests .quest:nth-child(7){animation-delay:0.35s}
+.quests .quest:nth-child(8){animation-delay:0.40s}
+
+@keyframes card-in{
+  from{opacity:0;transform:translateY(18px) scale(0.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes fade-up{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fade-in{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes title-pop{
+  0%{opacity:0;transform:scale(0.85);filter:blur(2px)}
+  70%{transform:scale(1.03)}
+  100%{opacity:1;transform:scale(1);filter:blur(0)}
+}
 
 /* misc */
 .power{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.power span{font:12px var(--px);background:#000;border:3px solid var(--mint);color:var(--mint);padding:12px 14px;border-radius:10px;box-shadow:3px 3px 0 #0b5a2c}
-.goal{margin-top:34px;border:3px dashed var(--sun);padding:22px;font:13px var(--px);line-height:1.9;color:var(--sun)}
+.power span{font:12px var(--px);background:#000;border:3px solid var(--mint);color:var(--mint);padding:12px 14px;border-radius:10px;box-shadow:3px 3px 0 #0b5a2c;
+  transition:transform 0.15s steps(2), box-shadow 0.15s steps(2), color 0.2s;
+  animation:card-in 0.6s ease-out both}
+.power span:nth-child(1){animation-delay:0.05s}
+.power span:nth-child(2){animation-delay:0.1s}
+.power span:nth-child(3){animation-delay:0.15s}
+.power span:nth-child(4){animation-delay:0.2s}
+.power span:nth-child(5){animation-delay:0.25s}
+.power span:nth-child(6){animation-delay:0.3s}
+.power span:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #0b5a2c;color:var(--sun)}
+.goal{margin-top:34px;border:3px dashed var(--sun);padding:22px;font:13px var(--px);line-height:1.9;color:var(--sun);
+  animation:goal-pulse 3s ease-in-out infinite}
+@keyframes goal-pulse{
+  0%,100%{border-color:var(--sun);box-shadow:0 0 0 rgba(255,228,94,0)}
+  50%{border-color:#fff3a0;box-shadow:0 0 16px rgba(255,228,94,0.25)}
+}
 .contact{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px}
-.door{width:64px;height:90px;background:#9b5b2a;border:6px solid #8d8d9a;border-bottom:0;border-radius:32px 32px 0 0;position:relative;margin-left:auto}
-.door::after{content:"";position:absolute;right:10px;top:48px;width:8px;height:8px;background:var(--sun)}
+.door{width:64px;height:90px;background:#9b5b2a;border:6px solid #8d8d9a;border-bottom:0;border-radius:32px 32px 0 0;position:relative;margin-left:auto;
+  animation:door-wiggle 4s ease-in-out infinite}
+.door::after{content:"";position:absolute;right:10px;top:48px;width:8px;height:8px;background:var(--sun);
+  animation:knob-glow 2s ease-in-out infinite}
+@keyframes door-wiggle{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(-1.5deg)}
+  75%{transform:rotate(1.5deg)}
+}
+@keyframes knob-glow{
+  0%,100%{box-shadow:0 0 0 var(--sun)}
+  50%{box-shadow:0 0 8px 2px var(--sun)}
+}
 .cta-row{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
 .coins{display:flex;gap:26px;padding:20px;justify-content:center;flex-wrap:wrap}
 .coins i{width:20px;height:20px;border-radius:50%;background:#ffb020;border:3px solid #ff8a00;animation:bob 1.2s steps(2) infinite}
 .coins i:nth-child(2n){animation-delay:.4s}
+.coins i:nth-child(3n){animation-delay:.7s}
 footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 40px;line-height:1.8}
 
 @media(max-width:860px){
@@ -126,16 +245,16 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
   .hero .player{left:6px}.hero .cat{right:10px}
   .frame{padding:56px 12px 70px}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+}
 </style>
 </head>
 <body>
-
 <div class="hud" aria-hidden="true">
   <span>XP: DATA SCIENCE LEVEL 03</span>
   <span class="hp"><svg class="sp" data-s="heart" data-px="3"></svg><span class="bar"><i></i></span>PLAYER 01</span>
 </div>
-
 <header class="hero" id="home">
   <span class="cloud" style="left:30%"><svg class="sp" data-s="cloud" data-px="5"></svg></span>
   <span class="cloud" style="right:6%;top:30px"><svg class="sp" data-s="cloud" data-px="4"></svg></span>
@@ -150,7 +269,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
 </header>
 <div class="ground"></div>
 <div class="ticker" aria-hidden="true"><div data-t="About Me"></div></div>
-
 <section id="profile">
   <div class="l1">
     <div class="title">
@@ -158,7 +276,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <p class="sub">Meet the<br>player</p>
       <h3 class="name">Aiyda<br>Syed</h3>
     </div>
-
     <div class="consolewrap">
       <div class="console">
         <div class="screen"><div><svg class="sp" data-s="girl" data-px="9" role="img" aria-label="Pixel avatar"></svg></div></div>
@@ -166,7 +283,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
         <div class="pad"></div>
       </div>
     </div>
-
     <article class="win hello kv">
       <span class="tag">Hello !!</span>
       <p><b>Player:</b> Aiyda Syed</p>
@@ -175,12 +291,10 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <p><b>Status:</b> Ready to explore, build and win.</p>
       <p>Let's start the game!</p>
     </article>
-
     <article class="win weap">
       <span class="tag">Weapons Mastery</span>
       <div class="tiles"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span>Scikit-learn</span><span>Plotly</span><span>Jupyter</span><span>Git</span><span>Streamlit</span></div>
     </article>
-
     <article class="win log kv">
       <span class="tag">Training Log</span>
       <p><b>BS Data Science</b></p>
@@ -188,7 +302,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <p>Currently pursuing • 3rd year</p>
       <p><b>Current focus:</b> Data + AI — learning by building.</p>
     </article>
-
     <article class="win skills">
       <span class="tag">Skills Mastery</span>
       <ul>
@@ -205,12 +318,10 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
   </div>
 </section>
 <div class="ticker" aria-hidden="true"><div data-t="Missions"></div></div>
-
 <section id="projects">
   <h2 class="lvl">Level<br>02</h2>
   <p class="sub">Missions: projects that solve problems</p>
   <div class="quests">
-
     <article class="win quest boss">
       <span class="n">BOSS</span>
       <span class="tag">InsightFlow: Data Whisperer</span>
@@ -219,7 +330,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Streamlit</i><i>Pandas</i><i>Plotly</i><i>AI</i></div>
       <a class="mini" href="https://github.com/aida214/InsightFlow" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">IN PROGRESS</span>
       <span class="tag">Lumi: AI Closet Stylist</span>
@@ -228,7 +338,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Streamlit</i><i>AI</i><i>Supabase</i><i>Computer Vision</i></div>
       <a class="mini" href="https://github.com/aida214/Lumi-AI-Closet" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">02</span>
       <span class="tag">Loan Risk Radar</span>
@@ -237,7 +346,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Pandas</i><i>Scikit-learn</i><i>Random Forest</i></div>
       <a class="mini" href="https://github.com/aida214/Bank-Loan-Default-Prediction" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">03</span>
       <span class="tag">Crystal Ball: Sales Forecast</span>
@@ -246,7 +354,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Pandas</i><i>Prophet</i><i>Matplotlib</i></div>
       <a class="mini" href="https://github.com/aida214/Sales-Revenue-Trend-Forecasting" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">04</span>
       <span class="tag">Customer Tribe Finder</span>
@@ -255,7 +362,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Pandas</i><i>Scikit-learn</i><i>Matplotlib</i></div>
       <a class="mini" href="https://github.com/aida214/Customer-segmentation-KMeans" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">05</span>
       <span class="tag">House Price Detective</span>
@@ -264,7 +370,6 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Scikit-learn</i><i>Pandas</i><i>Matplotlib</i></div>
       <a class="mini" href="https://github.com/aida214/BoustonHousing_RegressionProject" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
-
     <article class="win quest">
       <span class="n">06</span>
       <span class="tag">Sales Seasons Decoder</span>
@@ -273,12 +378,19 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
       <div class="chips"><i>Python</i><i>Pandas</i><i>Matplotlib</i><i>Statsmodels</i></div>
       <a class="mini" href="https://github.com/aida214/Sales-Trend-Seasonality-Analysis" target="_blank" rel="noopener">VIEW ON GITHUB</a>
     </article>
+    <article class="win quest">
+      <span class="n">07</span>
+      <span class="tag">Stock Oracle: Tech Market Insights</span>
+      <p><strong>Tech stock analysis &amp; insights</strong></p>
+      <p>Explored tech stock trends, patterns and signals to turn market data into clear, actionable insights.</p>
+      <div class="chips"><i>Python</i><i>Pandas</i><i>Matplotlib</i><i>Analysis</i></div>
+      <a class="mini" href="https://github.com/aida214/TechStock-Insights" target="_blank" rel="noopener">VIEW ON GITHUB</a>
+    </article>
   </div>
 </section>
 <div class="coins" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <div class="ground"></div>
 <div class="ticker" aria-hidden="true"><div data-t="Quest Log"></div></div>
-
 <section id="experience">
   <h2 class="lvl">Level<br>03</h2>
   <p class="sub">Quest log: current internship</p>
@@ -288,13 +400,10 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
     <p>Gaining practical experience and applying data skills in a professional environment.</p>
     <p>Practical exposure • Professional environment • Continuous learning</p>
   </article>
-
   <p class="sub" style="margin-top:44px">Power-ups: always learning</p>
   <div class="power"><span>Machine Learning</span><span>AI Applications</span><span>Data Analytics</span><span>Real-Time ML</span><span>AI Automation</span><span>n8n</span></div>
-
   <div class="goal">FINAL GOAL: Grow as a data professional by building technology that connects data with real-world needs.</div>
 </section>
-
 <section id="contact">
   <div class="cta-row">
     <div>
@@ -308,9 +417,7 @@ footer{text-align:center;font:10px var(--px);color:var(--lav);padding:26px 16px 
     <div class="door" aria-hidden="true"></div>
   </div>
 </section>
-
 <footer>Aiyda Syed • Data Science Portfolio © 2026</footer>
-
 <script>
 /* tiny pixel-sprite renderer: each map row is a string, each letter a palette colour */
 var S={
