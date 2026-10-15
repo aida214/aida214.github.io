@@ -95,19 +95,32 @@ svg.sp{display:block;shape-rendering:crispEdges}
 .frame .tl span{display:block}
 .frame .tl .a{color:var(--sun)}
 .frame .tl .b{color:var(--lav)}
-.btn{display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;background:#22d46e;border:3px solid var(--mint);border-radius:8px;padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48;
-  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s;
-  animation:fade-up 1s ease-out 0.45s both;position:relative;overflow:hidden;z-index:1}
-.btn::after{
-  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);
-  transform:skewX(-18deg);transition:left 0.45s ease;
+
+/* ===== BUTTONS — HOVER ANIMATIONS ===== */
+.btn{
+  display:inline-block;font:14px var(--px);text-decoration:none;color:#fff;
+  background:#22d46e;border:3px solid var(--mint);border-radius:8px;
+  padding:14px 22px;box-shadow:0 5px 0 #138c48;text-shadow:2px 2px 0 #138c48;
+  transition:transform 0.12s steps(2), box-shadow 0.12s steps(2), filter 0.2s, background 0.2s;
+  animation:fade-up 1s ease-out 0.45s both;position:relative;overflow:hidden;z-index:1;
 }
-.btn:hover::after{left:120%}
-.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #138c48;filter:brightness(1.15)}
-.btn:active{transform:translateY(5px);box-shadow:0 0 0 #138c48}
+.btn::after{
+  content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.45),transparent);
+  transform:skewX(-18deg);transition:left 0.4s ease;
+}
+.btn:hover::after{left:130%}
+.btn:hover{
+  transform:translateY(3px) scale(1.03);
+  box-shadow:0 2px 0 #138c48, 0 0 16px rgba(61,255,143,0.45);
+  filter:brightness(1.18);
+}
+.btn:active{transform:translateY(5px) scale(0.98);box-shadow:0 0 0 #138c48}
 .btn.pink{background:var(--pink);border-color:#ff7cc3;box-shadow:0 5px 0 #a3105f;text-shadow:2px 2px 0 #a3105f}
-.btn.pink:hover{box-shadow:0 2px 0 #a3105f}
+.btn.pink:hover{
+  box-shadow:0 2px 0 #a3105f, 0 0 18px rgba(255,46,154,0.5);
+  filter:brightness(1.15);
+}
 
 .hero .player{position:absolute;left:3%;bottom:-2px;filter:drop-shadow(0 0 6px rgba(255,143,208,0.35))}
 .hero .cat{position:absolute;right:20%;bottom:-2px;filter:drop-shadow(0 0 6px rgba(107,107,255,0.3))}
@@ -131,11 +144,19 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .sub{font:12px var(--px);color:var(--lav);margin:12px 0 18px;line-height:1.7}
 .name{font:clamp(22px,4.4vw,38px) var(--px);color:var(--mint);line-height:1.2;text-shadow:3px 3px 0 #0b5a2c}
 
-/* windows */
-.win{background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38;
-  transition:transform 0.22s steps(2), box-shadow 0.22s steps(2), filter 0.25s;
-  animation:card-in 0.75s cubic-bezier(0.22,1,0.36,1) both}
-.win:hover{transform:translate(-3px,-4px) rotate(-0.4deg);box-shadow:10px 10px 0 #5a0a38;filter:brightness(1.03)}
+/* ===== CARDS — HOVER ANIMATIONS ===== */
+.win{
+  background:var(--panel);border:3px solid var(--pink);color:var(--panel-ink);
+  position:relative;padding:38px 16px 16px;box-shadow:6px 6px 0 #5a0a38;
+  transition:transform 0.2s steps(2), box-shadow 0.2s steps(2), filter 0.25s, border-color 0.25s;
+  animation:card-in 0.75s cubic-bezier(0.22,1,0.36,1) both;
+}
+.win:hover{
+  transform:translate(-4px,-6px) rotate(-0.6deg) scale(1.015);
+  box-shadow:12px 12px 0 #5a0a38, 0 0 24px rgba(255,46,154,0.25);
+  filter:brightness(1.05);
+  border-color:#ff5fb0;
+}
 .win::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:var(--pink);
   background-image:linear-gradient(90deg,transparent 0 6px,#ffb3de 6px 14px,transparent 14px),linear-gradient(90deg,transparent calc(100% - 52px),#ffb3de calc(100% - 52px) calc(100% - 44px),transparent calc(100% - 44px) calc(100% - 30px),#ffb3de calc(100% - 30px) calc(100% - 22px),transparent calc(100% - 22px));
   background-size:100% 8px,100% 8px;background-repeat:no-repeat;background-position:0 7px,0 7px}
@@ -152,7 +173,12 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .consolewrap{display:flex;justify-content:center;grid-column:2;grid-row:1}
 .hello{grid-column:3;grid-row:1}
 .console{width:100%;max-width:360px;background:#ff1493;border:4px solid #b30d6c;border-radius:20px 20px 12px 12px;padding:12px;box-shadow:inset -6px -6px 0 #c70f78,6px 6px 0 #5a0a38;
-  animation:console-float 3.2s ease-in-out infinite;position:relative}
+  animation:console-float 3.2s ease-in-out infinite;position:relative;
+  transition:transform 0.25s steps(2), box-shadow 0.25s}
+.console:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:inset -6px -6px 0 #c70f78, 8px 12px 0 #5a0a38, 0 0 28px rgba(255,20,147,0.4);
+}
 .console::after{
   content:"";position:absolute;inset:8px;border-radius:14px;pointer-events:none;
   box-shadow:0 0 20px rgba(255,20,147,0.25);opacity:0.6;
@@ -180,21 +206,20 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .tiles span{background:#1a0a22;color:var(--mint);font:11px var(--px);text-align:center;padding:14px 4px;border-radius:8px;border:2px solid var(--pink);line-height:1.5;
   transition:transform 0.15s steps(2), background 0.2s, color 0.2s, box-shadow 0.2s;
   cursor:default}
-.tiles span:hover{transform:scale(1.08) translateY(-2px);background:#2a1235;color:var(--sun);
-  box-shadow:0 0 12px rgba(255,228,94,0.35)}
+.tiles span:hover{transform:scale(1.1) translateY(-3px);background:#2a1235;color:var(--sun);
+  box-shadow:0 0 14px rgba(255,228,94,0.45), 0 4px 0 rgba(0,0,0,0.3)}
 
-/* ========== PROJECT CARDS — FIXED BUTTON ALIGNMENT ========== */
+/* ========== PROJECT CARDS ========== */
 .quests{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
   gap:34px 26px;
   margin-top:26px;
-  align-items:stretch;          /* all cards same height */
+  align-items:stretch;
 }
 .quest{
   display:flex;
-  flex-direction:column;        /* stack content vertically */
-  /* no height:100% needed — grid stretch already makes them equal */
+  flex-direction:column;
 }
 .quest .n{position:absolute;right:10px;top:-2px;font:11px var(--px);color:#fff;z-index:1;line-height:22px}
 .quest p{flex-shrink:0}
@@ -206,10 +231,10 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
   flex-shrink:0;
 }
 .chips i{font:normal 18px var(--vt);background:#1a0a22;color:var(--mint);padding:2px 8px;border-radius:4px;
-  transition:transform 0.15s steps(2), box-shadow 0.2s}
-.chips i:hover{transform:translateY(-3px);box-shadow:0 4px 0 rgba(0,0,0,0.3)}
+  transition:transform 0.15s steps(2), box-shadow 0.2s, color 0.2s}
+.chips i:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 4px 0 rgba(0,0,0,0.3);color:var(--sun)}
 
-/* THIS is the key: button always sticks to the bottom */
+/* VIEW ON GITHUB button */
 .mini{
   font:11px var(--px);
   text-decoration:none;
@@ -219,7 +244,7 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
   border:2px solid #a9a9ff;
   box-shadow:0 3px 0 #3a3ab0;
   display:inline-block;
-  margin-top:auto;              /* ← pushes every button to the same bottom line */
+  margin-top:auto;
   align-self:flex-start;
   position:relative;
   overflow:hidden;
@@ -227,21 +252,32 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 }
 .mini::after{
   content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.45),transparent);
   transform:skewX(-16deg);transition:left 0.4s ease;
 }
 .mini:hover::after{left:130%}
-.mini:hover{transform:translateY(2px);box-shadow:0 1px 0 #3a3ab0;filter:brightness(1.18)}
+.mini:hover{
+  transform:translateY(2px) scale(1.04);
+  box-shadow:0 1px 0 #3a3ab0, 0 0 14px rgba(107,107,255,0.5);
+  filter:brightness(1.2);
+}
+.mini:active{transform:translateY(3px) scale(0.98)}
 
+/* Boss card hover */
 .quest.boss{border-color:var(--sun);box-shadow:6px 6px 0 #6b5a00;
   animation:boss-glow 2.6s ease-in-out infinite alternate, card-in 0.75s cubic-bezier(0.22,1,0.36,1) both}
+.quest.boss:hover{
+  transform:translate(-4px,-6px) rotate(-0.5deg) scale(1.02);
+  box-shadow:12px 12px 0 #6b5a00, 0 0 36px rgba(255,228,94,0.6), 0 0 60px rgba(255,228,94,0.25);
+  border-color:#fff3a0;
+  filter:brightness(1.06);
+}
 @keyframes boss-glow{
   0%{box-shadow:6px 6px 0 #6b5a00, 0 0 10px rgba(255,228,94,0.25)}
   100%{box-shadow:6px 6px 0 #6b5a00, 0 0 28px rgba(255,228,94,0.55), 0 0 48px rgba(255,228,94,0.2)}
 }
-.quest.boss:hover{box-shadow:10px 10px 0 #6b5a00, 0 0 36px rgba(255,228,94,0.65)}
 
-/* staggered card entrance */
+/* staggered entrance */
 .l1 .win:nth-child(1){animation-delay:0.05s}
 .l1 .win:nth-child(2){animation-delay:0.12s}
 .l1 .win:nth-child(3){animation-delay:0.18s}
@@ -275,7 +311,7 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
   100%{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
-/* misc */
+/* power-ups */
 .power{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .power span{font:12px var(--px);background:#000;border:3px solid var(--mint);color:var(--mint);padding:12px 14px;border-radius:10px;box-shadow:3px 3px 0 #0b5a2c;
   transition:transform 0.15s steps(2), box-shadow 0.15s steps(2), color 0.2s, filter 0.2s;
@@ -286,16 +322,23 @@ section{max-width:1100px;margin:0 auto;padding:70px 20px 30px;position:relative}
 .power span:nth-child(4){animation-delay:0.2s}
 .power span:nth-child(5){animation-delay:0.25s}
 .power span:nth-child(6){animation-delay:0.3s}
-.power span:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 #0b5a2c;color:var(--sun);filter:drop-shadow(0 0 6px rgba(255,228,94,0.4))}
+.power span:hover{
+  transform:translate(-3px,-4px) scale(1.05);
+  box-shadow:6px 6px 0 #0b5a2c, 0 0 14px rgba(61,255,143,0.4);
+  color:var(--sun);filter:drop-shadow(0 0 6px rgba(255,228,94,0.4));
+}
 .goal{margin-top:34px;border:3px dashed var(--sun);padding:22px;font:13px var(--px);line-height:1.9;color:var(--sun);
-  animation:goal-pulse 2.8s ease-in-out infinite;position:relative}
+  animation:goal-pulse 2.8s ease-in-out infinite;position:relative;
+  transition:box-shadow 0.25s, border-color 0.25s}
+.goal:hover{box-shadow:0 0 28px rgba(255,228,94,0.4);border-color:#fff3a0}
 @keyframes goal-pulse{
   0%,100%{border-color:var(--sun);box-shadow:0 0 0 rgba(255,228,94,0)}
   50%{border-color:#fff3a0;box-shadow:0 0 20px rgba(255,228,94,0.3)}
 }
 .contact{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px}
 .door{width:64px;height:90px;background:#9b5b2a;border:6px solid #8d8d9a;border-bottom:0;border-radius:32px 32px 0 0;position:relative;margin-left:auto;
-  animation:door-wiggle 3.8s ease-in-out infinite}
+  animation:door-wiggle 3.8s ease-in-out infinite;transition:transform 0.2s}
+.door:hover{transform:scale(1.08) rotate(-3deg)}
 .door::after{content:"";position:absolute;right:10px;top:48px;width:8px;height:8px;background:var(--sun);
   animation:knob-glow 1.8s ease-in-out infinite}
 @keyframes door-wiggle{
